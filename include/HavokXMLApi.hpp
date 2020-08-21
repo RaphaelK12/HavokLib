@@ -48,8 +48,8 @@ public:
 class xmlRootLevelContainer : public hkRootLevelContainerInternalInterface {
   DECLARE_XMLCLASS(xmlRootLevelContainer, hkRootLevelContainer)
 
-  const int GetNumVariants() const { return static_cast<int>(variants.size()); }
-  const hkNamedVariant GetVariant(int id) const { return variants.at(id); }
+  size_t Size() const override { return variants.size(); }
+  const hkNamedVariant At(size_t id) const override { return variants.at(id); }
   void AddVariant(hkVirtualClass *input) {
     variants.push_back({input->name, input->name, input});
   }
@@ -145,6 +145,8 @@ class xmlSkeleton : public hkaSkeletonInternalInterface {
 class xmlAnnotationTrack : public hkaAnnotationTrackInternalInterface {
   DECLARE_XMLCLASS(xmlAnnotationTrack, hkaAnnotationTrack);
 
+  size_t Size() const override { return 0; }
+  const hkaAnnotationFrame At(size_t) const override { return {}; } 
   es::string_view GetName() const override { return name; }
   std::string name;
 };
