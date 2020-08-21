@@ -36,6 +36,8 @@ static const es::string_view versions[] = {
 #include "test_skeleton.inl"
 #include "test_spline.inl"
 
+#include "test_sample.inl"
+
 #ifdef _MSC_VER
 // Use Visual C++'s memory checking functionality
 #define _CRTDBG_MAP_ALLOC
@@ -52,7 +54,7 @@ int main() {
 
   TEST_CASES(int resultVar, TEST_FUNC(test_skeleton),
              TEST_FUNC(test_defaultmotion), TEST_FUNC(test_spline),
-             TEST_FUNC(test_interleaved), TEST_FUNC(test_delta));
+             TEST_FUNC(test_interleaved), TEST_FUNC(test_delta), TEST_FUNC(test_sample));
 
   return resultVar;
 }
