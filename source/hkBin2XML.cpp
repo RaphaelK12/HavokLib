@@ -398,7 +398,7 @@ void hkaAnimationInternalInterface::ToXML(XMLHandle hdl) const {
   annotsNode.append_attribute(_hkNumElements).set_value(GetNumAnnotations());
 
   if (hdl.toolset > HK660) {
-    for (auto a : *this) {
+    for (auto a : Annotations()) {
       pugi::xml_node annotNode = annotsNode.append_child(_hkObject);
       XMLHandle annotHandle = hdl;
       annotHandle.node = &annotNode;
@@ -413,7 +413,7 @@ void hkaAnimationInternalInterface::ToXML(XMLHandle hdl) const {
     std::string buffer = ident;
     int cc = 0;
 
-    for (auto a : *this) {
+    for (auto a : Annotations()) {
       std::string _buffer;
       PointerToString(a.get(), _buffer);
 
@@ -447,7 +447,7 @@ void hkaAnimationInternalInterface::ToXML(XMLHandle hdl) const {
 }
 
 void hkaInterleavedAnimationInternalInterface::ToXML(XMLHandle hdl) const {
-  dynamic_cast<const hkaAnimationInternalInterface*>(this)->ToXML(hdl);
+  hkaAnimationInternalInterface::ToXML(hdl);
 
   const size_t numTransforms = GetNumTransforms();
   static const char *ident = "\n\t\t\t\t";
